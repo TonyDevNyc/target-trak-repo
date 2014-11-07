@@ -1,0 +1,67 @@
+/* style rows on mouseover */
+.x-grid-row-over .x-grid-cell-inner {
+    font-weight: bold;
+}
+/* shared styles for the ActionColumn icons */
+.x-action-col-cell img {
+    height: 16px;
+    width: 16px;
+    cursor: pointer;
+}
+/* custom icon for the "buy" ActionColumn icon */
+
+/* custom icon for the "edit" ActionColumn icon */
+.x-action-col-cell img.icon-edit {
+    background-image: url(../icons/image_edit.png);
+}
+/* custom icon for the "delete" ActionColumn icon */
+.x-action-col-cell img.icon-delete {
+    background-image: url(../icons/image_delete.png);
+}
+
+
+.icon-user-suit {
+    background-image: url(../icons/user_suit.png) ! important;
+}
+
+.icon-company {
+    height: 14px;
+    width: 14px;
+    background-image: url(../icons/company.ico) ! important;
+}
+
+.icon-court {
+    height: 14px;
+    width: 14px;
+    background-image: url(../icons/court.png) ;
+}
+
+.x-action-col-icon {
+    height: 16px;
+    width: 16px;
+    margin-right: 8px;
+}
+
+.add-icon {
+    height: 20px;
+    width: 20px;
+    margin-right: 8px;
+    background-image: url(../icons/add.gif)  ! important;
+}
+
+.save-icon {
+    height: 20px;
+    width: 20px;
+    background-image: url(../icons/page_save.png)  ! important;
+    margin-right: 8px;
+}
+
+.x-tip {
+    width: auto !important;
+}
+.x-tip-body {
+    width: auto !important;
+}
+.x-tip-body span {
+    width: auto !important;
+}
