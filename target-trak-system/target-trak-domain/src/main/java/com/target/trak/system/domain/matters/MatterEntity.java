@@ -13,6 +13,7 @@ public class MatterEntity implements Serializable {
 	private MatterTypeEntity matterType;
 	private ContactEntity primaryContact;
 	private String status;
+	private String createdBy;
 	private Timestamp createDate;
 	private Timestamp completionDate;
 	private Timestamp serviceLevelAgrementDate;
@@ -49,6 +50,14 @@ public class MatterEntity implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
 	}
 
 	public Timestamp getCreateDate() {

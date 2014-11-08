@@ -12,7 +12,11 @@ public interface MatterDao {
 	
 	public List<MatterEntity> getAllMatters();
 	
+	public List<MatterEntity> getInactiveMatters();
+	
 	public MatterEntity updateMatter(final MatterEntity matter);
 	
-	public void deleteMatter(final MatterEntity matter);
+	public MatterEntity inactivateMatter(final MatterEntity matter);
+	
+	public int getNumberOfActiveMatters();
 }

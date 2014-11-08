@@ -4,31 +4,82 @@
 <properties>
 	<entry key="insertMatterSql">
 	    <![CDATA[
-	             
+            INSERT INTO target_trak.matter (matter_type_id, primary_contact_id, matter_status,
+			create_date, completion_date, created_by, last_updated_by, last_updated_date,
+			sla_date)
+			VALUES (:matterTypeId, :primaryContactId, :matterStatus, :createDate, :completionDate,
+			:createdBy, :lastUpdatedBy, :lastUpdatedDate, :slaDate) 
 	    ]]>
 	</entry>
 	<entry key="getMatterByIdSql">
 	    <![CDATA[
-			SELECT
-				id, matter_type_id, primary_contact_id, matter_status, create_date,
-				completion_date, created_by, last_updated_by, last_updated_date, sla_date
-			FROM target_trak.matter
-			WHERE id = :id
+			SELECT m.id, m.matter_status, m.create_date, m.completion_date,
+			m.created_by, m.last_updated_by, m.last_updated_date, m.sla_date,
+			m.primary_contact_id, c.first_name, c.last_name, c.middle_initial, c.suffix, c.company_id,
+			m.matter_type_id, mt.matter_type_desc
+				FROM target_trak.matter m
+			INNER JOIN target_trak.matter_type mt
+				ON m.matter_type_id = mt.id
+			INNER JOIN target_trak.contact c
+				ON m.primary_contact_id = c.id
+			WHERE m.id = :id
+				AND m.matter_status <> 'Inactive'
 	    ]]>
 	</entry>
 	<entry key="getAllMattersSql">
 	    <![CDATA[
-	
+			SELECT m.id, m.matter_status, m.create_date, m.completion_date,
+			m.created_by, m.last_updated_by, m.last_updated_date, m.sla_date,
+			m.primary_contact_id, c.first_name, c.last_name, c.middle_initial, c.suffix, c.company_id,
+			m.matter_type_id, mt.matter_type_desc
+				FROM target_trak.matter m
+			INNER JOIN target_trak.matter_type mt
+				ON m.matter_type_id = mt.id
+			INNER JOIN target_trak.contact c
+				ON m.primary_contact_id = c.id
+			WHERE m.matter_status <> 'Inactive'
 	    ]]>
 	</entry>
-	<entry key="updateMattersSql">
+	<entry key="getInactiveMattersSql">
 	    <![CDATA[
-	
+			SELECT m.id, m.matter_status, m.create_date, m.completion_date,
+			m.created_by, m.last_updated_by, m.last_updated_date, m.sla_date,
+			m.primary_contact_id, c.first_name, c.last_name, c.middle_initial, c.suffix, c.company_id,
+			m.matter_type_id, mt.matter_type_desc
+				FROM target_trak.matter m
+			INNER JOIN target_trak.matter_type mt
+				ON m.matter_type_id = mt.id
+			INNER JOIN target_trak.contact c
+				ON m.primary_contact_id = c.id
+			WHERE m.matter_status = 'Inactive'
 	    ]]>
 	</entry>
-	<entry key="deleteMattersSql">
+	<entry key="updateMatterSql">
 	    <![CDATA[
-	
+			UPDATE target_trak.matter 
+			    SET primary_contact_id, 	= :primaryContactId,
+			        matter_status		 	= :matterStatus,
+			        completion_date 		= :completionDate, 
+			        last_updated_by 		= :lastUpdatedBy,
+			        last_updated_date 		= :lastUpdatedDate,
+			        sla_date 				= :slaDate
+			WHERE id = :id
+	    ]]>
+	</entry>
+	<entry key="inactivateMatterSql">
+	    <![CDATA[
+			UPDATE target_trak.matter 
+			    SET matter_status = 'Inactive'
+			WHERE id = :id
+	    ]]>
+	</entry>
+	<entry key="getNumberOfActiveMattersSql">
+	    <![CDATA[
+			SELECT matter_type_id, count(*) AS 'number_of_matters'
+				FROM target_trak.matter
+			WHERE matter_status <> 'Inactive'
+			GROUP BY matter_type_id
+			HAVING COUNT(*) > 1
 	    ]]>
 	</entry>
 </properties>
