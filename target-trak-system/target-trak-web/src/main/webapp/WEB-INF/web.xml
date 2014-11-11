@@ -24,7 +24,7 @@
 
 	<servlet-mapping>
 		<servlet-name>target-trak-dispatcher</servlet-name>
-		<url-pattern>/api/*</url-pattern>
+		<url-pattern>/app/*</url-pattern>
 	</servlet-mapping>
 
 	<!-- <filter>

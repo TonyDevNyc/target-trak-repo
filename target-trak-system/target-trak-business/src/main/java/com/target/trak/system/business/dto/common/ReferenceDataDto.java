@@ -1,10 +1,6 @@
-package com.target.trak.system.domain;
+package com.target.trak.system.business.dto.common;
 
-import java.io.Serializable;
-
-public class ReferenceDataEntity implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class ReferenceDataDto {
 
 	private Long id;
 	private String type;
@@ -42,5 +38,4 @@ public class ReferenceDataEntity implements Serializable {
 	public void setValue(String value) {
 		this.value = value;
 	}
-
 }

@@ -1,11 +1,8 @@
-package com.target.trak.system.domain;
+package com.target.trak.system.business.dto.common;
 
-import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Calendar;
 
-public class CourtEntity implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class CourtDto {
 
 	private Long id;
 	private String name;
@@ -17,7 +14,7 @@ public class CourtEntity implements Serializable {
 	private String state;
 	private String zipcode;
 	private String lastUpdatedBy;
-	private Timestamp lastUpdatedDate;
+	private Calendar lastUpdatedDate;
 
 	public Long getId() {
 		return id;
@@ -99,11 +96,11 @@ public class CourtEntity implements Serializable {
 		this.lastUpdatedBy = lastUpdatedBy;
 	}
 
-	public Timestamp getLastUpdatedDate() {
+	public Calendar getLastUpdatedDate() {
 		return lastUpdatedDate;
 	}
 
-	public void setLastUpdatedDate(Timestamp lastUpdatedDate) {
+	public void setLastUpdatedDate(Calendar lastUpdatedDate) {
 		this.lastUpdatedDate = lastUpdatedDate;
 	}
 

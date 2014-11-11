@@ -16,7 +16,10 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import com.target.trak.system.domain.CompanyEntity;
+import com.target.trak.system.domain.ContactEntity;
 import com.target.trak.system.domain.matters.MatterEntity;
+import com.target.trak.system.domain.matters.MatterTypeEntity;
 import com.target.trak.system.persistence.MatterDao;
 
 @Repository
@@ -54,7 +57,7 @@ public class MatterDaoImpl implements MatterDao {
 			final Long newKey = keyHolder.getKey().longValue();
 			matter.setId(newKey.longValue());
 		} else {
-			throw new RuntimeException("Company Data was not created");
+			throw new RuntimeException("Matter was not created!");
 		}
 		return matter;
 	}
@@ -114,9 +117,8 @@ public class MatterDaoImpl implements MatterDao {
 
 	@Override
 	public int getNumberOfActiveMatters() {
-		String sql = matterQueries.getProperty("");
-		//int count = matterTemplate.queryForObject(sql, null, Integer.class);
-		return 0;
+		String sql = matterQueries.getProperty("getNumberOfActiveMattersSql");
+		return matterTemplate.getJdbcOperations().queryForObject(sql, new Object[] {}, Integer.class);
 	}
 
 	private final class MatterRowMapper implements RowMapper<MatterEntity> {
@@ -124,6 +126,33 @@ public class MatterDaoImpl implements MatterDao {
 		@Override
 		public MatterEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
 			MatterEntity entity = new MatterEntity();
+			entity.setId(rs.getLong("id"));
+			entity.setStatus(rs.getString("matter_status"));
+			entity.setCreateDate(rs.getTimestamp("create_date"));
+			entity.setCompletionDate(rs.getTimestamp("completion_date"));
+			entity.setCreatedBy(rs.getString("created_by"));
+			entity.setLastUpdatedBy(rs.getString("last_updated_by"));
+			entity.setLastUpdatedDate(rs.getTimestamp("last_updated_date"));
+			entity.setServiceLevelAgrementDate(rs.getTimestamp("sla_date"));
+
+			ContactEntity primaryContact = new ContactEntity();
+			primaryContact.setId(rs.getLong("primary_contact_id"));
+			primaryContact.setFirstName(rs.getString("first_name"));
+			primaryContact.setLastName(rs.getString("last_name"));
+			primaryContact.setMiddleInitial(rs.getString("middle_initial"));
+			primaryContact.setSuffix(rs.getString("suffix"));
+
+			CompanyEntity company = new CompanyEntity();
+			company.setId(rs.getLong("company_id"));
+			primaryContact.setCompany(company);
+
+			MatterTypeEntity matterType = new MatterTypeEntity();
+			matterType.setId(rs.getLong("matter_type_id"));
+			matterType.setMatterTypeDescription(rs.getString("matter_type_desc"));
+
+			entity.setPrimaryContact(primaryContact);
+			entity.setMatterType(matterType);
+
 			return entity;
 		}
 

@@ -1,13 +1,11 @@
-package com.target.trak.system.domain;
+package com.target.trak.system.business.dto.common;
 
-import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Calendar;
 
-public class ContactEntity implements Serializable {
+public class ContactDto {
 
-	private static final long serialVersionUID = 1L;
 	private Long id;
-	private ContactTypeEntity contactType;
+	private ContactTypeDto contactType;
 	private String title;
 	private String firstName;
 	private String lastName;
@@ -16,9 +14,9 @@ public class ContactEntity implements Serializable {
 	private String telephoneNumber;
 	private String emailAddress;
 	private String lastUpdatedBy;
-	private Timestamp lastUpdatedDate;
+	private Calendar lastUpdatedDate;
 	private Boolean activeAtCompany;
-	private CompanyEntity company;
+	private CompanyDto company;
 
 	public Long getId() {
 		return id;
@@ -28,11 +26,11 @@ public class ContactEntity implements Serializable {
 		this.id = id;
 	}
 
-	public ContactTypeEntity getContactType() {
+	public ContactTypeDto getContactType() {
 		return contactType;
 	}
 
-	public void setContactType(ContactTypeEntity contactType) {
+	public void setContactType(ContactTypeDto contactType) {
 		this.contactType = contactType;
 	}
 
@@ -100,11 +98,11 @@ public class ContactEntity implements Serializable {
 		this.lastUpdatedBy = lastUpdatedBy;
 	}
 
-	public Timestamp getLastUpdatedDate() {
+	public Calendar getLastUpdatedDate() {
 		return lastUpdatedDate;
 	}
 
-	public void setLastUpdatedDate(Timestamp lastUpdatedDate) {
+	public void setLastUpdatedDate(Calendar lastUpdatedDate) {
 		this.lastUpdatedDate = lastUpdatedDate;
 	}
 
@@ -116,11 +114,11 @@ public class ContactEntity implements Serializable {
 		this.activeAtCompany = activeAtCompany;
 	}
 
-	public CompanyEntity getCompany() {
+	public CompanyDto getCompany() {
 		return company;
 	}
 
-	public void setCompany(CompanyEntity company) {
+	public void setCompany(CompanyDto company) {
 		this.company = company;
 	}
 
