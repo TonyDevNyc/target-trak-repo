@@ -19,6 +19,7 @@ import org.springframework.stereotype.Repository;
 import com.target.trak.system.domain.CompanyEntity;
 import com.target.trak.system.domain.ContactEntity;
 import com.target.trak.system.domain.matters.MatterEntity;
+import com.target.trak.system.domain.matters.MatterStatusBreakdown;
 import com.target.trak.system.domain.matters.MatterTypeEntity;
 import com.target.trak.system.persistence.MatterDao;
 
@@ -71,7 +72,7 @@ public class MatterDaoImpl implements MatterDao {
 	}
 
 	@Override
-	public List<MatterEntity> getAllMatters() {
+	public List<MatterEntity> selectAllMatters() {
 		String sql = matterQueries.getProperty("getAllMattersSql");
 		return matterTemplate.query(sql, new MatterRowMapper());
 	}
@@ -110,15 +111,27 @@ public class MatterDaoImpl implements MatterDao {
 	}
 
 	@Override
-	public List<MatterEntity> getInactiveMatters() {
+	public List<MatterEntity> selectInactiveMatters() {
 		String sql = matterQueries.getProperty("getInactiveMattersSql");
 		return matterTemplate.query(sql, new MatterRowMapper());
 	}
 
 	@Override
-	public int getNumberOfActiveMatters() {
+	public int selectNumberOfActiveMatters() {
 		String sql = matterQueries.getProperty("getNumberOfActiveMattersSql");
 		return matterTemplate.getJdbcOperations().queryForObject(sql, new Object[] {}, Integer.class);
+	}
+
+	@Override
+	public List<MatterStatusBreakdown> selectMatterStatusBreakdown() {
+		String sql = matterQueries.getProperty("getMatterStatusBreakdownSql");
+		return matterTemplate.getJdbcOperations().query(sql, new MatterStatusBreakdownRowMapper());
+	}
+
+	@Override
+	public List<MatterEntity> selectMattersDueByWeek() {
+		String sql = matterQueries.getProperty("getMattersDueInAWeekSql");
+		return matterTemplate.query(sql, new MatterRowMapper());
 	}
 
 	private final class MatterRowMapper implements RowMapper<MatterEntity> {
@@ -152,9 +165,19 @@ public class MatterDaoImpl implements MatterDao {
 
 			entity.setPrimaryContact(primaryContact);
 			entity.setMatterType(matterType);
-
 			return entity;
 		}
+	}
+	
+	private final class MatterStatusBreakdownRowMapper implements RowMapper<MatterStatusBreakdown> {
 
+		@Override
+		public MatterStatusBreakdown mapRow(ResultSet rs, int rowNum) throws SQLException {
+			MatterStatusBreakdown bd = new MatterStatusBreakdown();
+			bd.setCount(rs.getInt("status_count"));
+			bd.setStatus(rs.getString("matter_status"));
+			return bd;
+		}
+		
 	}
 }

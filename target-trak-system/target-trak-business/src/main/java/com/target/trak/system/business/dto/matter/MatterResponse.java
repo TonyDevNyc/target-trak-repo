@@ -9,6 +9,15 @@ public class MatterResponse extends TargetTrakResponse {
 	private int count;
 	private MatterDto matter;
 	private List<MatterDto> matters;
+	private List<MatterStatusBreakdownDto> matterStatusBreakdown;
+
+	public List<MatterStatusBreakdownDto> getMatterStatusBreakdown() {
+		return matterStatusBreakdown;
+	}
+
+	public void setMatterStatusBreakdown(List<MatterStatusBreakdownDto> matterStatusBreakdown) {
+		this.matterStatusBreakdown = matterStatusBreakdown;
+	}
 
 	public int getCount() {
 		return count;

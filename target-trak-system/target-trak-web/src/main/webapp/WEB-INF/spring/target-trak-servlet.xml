@@ -10,9 +10,9 @@
 	<mvc:annotation-driven />
 
 	<mvc:default-servlet-handler />
-	<mvc:resources mapping="/resources**" location="/resources/" />
+	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:resources mapping="/app.js" location="/app.js" />
-	<mvc:resources mapping="/app**" location="/app/" />
+	<mvc:resources mapping="/app/**" location="/app/" />
 	<mvc:resources mapping="/app*" location="/" />
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
