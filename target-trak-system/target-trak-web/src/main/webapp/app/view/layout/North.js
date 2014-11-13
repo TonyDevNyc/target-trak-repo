@@ -10,7 +10,7 @@ Ext.define('TGT.view.layout.North', {
         Ext.applyIf(me,{
             items: [
                 {
-                	xtype: 'menu.traktrakmeu'
+                	xtype: 'menu.targettrakmenu'
                 }
             ]
         });

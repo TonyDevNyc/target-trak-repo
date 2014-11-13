@@ -3,13 +3,14 @@ Ext.define('TGT.view.Viewport', {
     requires : [ 
         'Ext.layout.container.Border',
         'TGT.view.layout.Center',
-        'TGT.view.layout.North',
+        'TGT.view.layout.North'
     ],
     layout : {
         type : 'border'
     },
     items : [ 
-        { xtype: 'layout.center' },
-        { xtype: 'layout.north' }
+        { xtype: 'layout.north' },
+        { xtype: 'layout.center' }
+        
     ]
 });
