@@ -10,7 +10,7 @@ Ext.application({
 	
 	requires: [],
 	
-    controllers: [],
+    controllers: ['TargetTrakBaseController', 'HomepageController'],
 	
 	autoCreateViewport: true,
 

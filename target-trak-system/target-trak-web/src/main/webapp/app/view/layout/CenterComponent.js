@@ -2,19 +2,13 @@ Ext.define('TGT.view.layout.CenterComponent', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.layout.centercomponent',
     requires: [
-       
+       'TGT.view.landing.Homepage'
     ],
     layout: 'card',
-    initComponent: function(){
-        var me = this;
-        Ext.applyIf(me,{
-            items: [
-                {
-                   html:'<P>Hi its the center</P>'
-                    
-                }
-            ]
-        });
-        me.callParent( arguments );
-    } 
+    items: [
+        {
+           xtype: 'landing.homepage',
+           activeItem: 0
+        }
+    ]
 });

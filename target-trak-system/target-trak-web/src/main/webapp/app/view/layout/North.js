@@ -5,15 +5,9 @@ Ext.define('TGT.view.layout.North', {
        'TGT.view.menu.TargetTrakMenu'
     ],
     region: 'north',
-    initComponent: function(){
-        var me = this;
-        Ext.applyIf(me,{
-            items: [
-                {
-                	xtype: 'menu.targettrakmenu'
-                }
-            ]
-        });
-        me.callParent( arguments );
-    } 
+    items: [
+        {
+        	xtype: 'menu.targettrakmenu'
+        }
+    ]
 });
